@@ -1,0 +1,23 @@
+.campo {
+  width: 100%;
+}
+
+.linha {
+  display: flex;
+  gap: 12px;
+}
+
+.campo--metade {
+  flex: 1.4;
+}
+
+.campo--terco {
+  flex: 1;
+}
+
+.aviso {
+  font-size: 13px;
+  font-style: italic;
+  color: #1976d2;
+  margin-top: 4px;
+}

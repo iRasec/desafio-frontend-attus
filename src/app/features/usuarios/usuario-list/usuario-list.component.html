@@ -1,0 +1,57 @@
+<mat-toolbar color="primary" class="toolbar">
+  <button mat-icon-button aria-label="Menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="titulo">USUÁRIOS</span>
+
+  <mat-form-field appearance="outline" class="busca" subscriptSizing="dynamic">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput placeholder="Pesquisar..." [formControl]="busca" />
+  </mat-form-field>
+</mat-toolbar>
+
+<main class="conteudo">
+  <h2 class="secao-titulo">Usuários cadastrados</h2>
+
+  @if (carregando()) {
+    <div class="estado">
+      <mat-spinner diameter="36"></mat-spinner>
+    </div>
+  } @else if (erro()) {
+    <div class="estado erro">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ erro() }}</span>
+    </div>
+  } @else if (usuarios().length === 0) {
+    <div class="estado">
+      <span>Nenhum usuário encontrado.</span>
+    </div>
+  } @else {
+    <div class="lista">
+      @for (usuario of usuarios(); track usuario.id) {
+        <mat-card class="usuario-card" appearance="outlined">
+          <mat-icon class="avatar">person</mat-icon>
+          <span class="nome">{{ usuario.nome }}</span>
+          <span class="email">{{ usuario.email }}</span>
+          <button
+            mat-icon-button
+            aria-label="Editar usuário"
+            (click)="editarUsuario(usuario)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-card>
+      }
+    </div>
+  }
+</main>
+
+<button
+  mat-fab
+  color="warn"
+  class="fab-adicionar"
+  aria-label="Adicionar novo usuário"
+  (click)="abrirNovoUsuario()"
+>
+  <mat-icon>add</mat-icon>
+</button>
